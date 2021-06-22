@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\galileo.galvan\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\galileo.galvan\\.nuget\\packages"
+    ]
+  }
+}
