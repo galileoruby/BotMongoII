@@ -29,4 +29,4 @@ namespace BotMongoII.GraphQL.Types
         }
 
     }
-}
+}//namespace BotMongoII.GraphQL.Types
