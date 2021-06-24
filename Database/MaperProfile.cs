@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BotMongoII.Models;
+using BotMongoII.Models.Zip;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,15 @@ namespace BotMongoII.Database
         public MaperProfile()
         {
             CreateMap<AirMongoDB, AirMongoModel>().ReverseMap();
+
+             
+            CreateMap<ZipLoc, ZipLocModel>().ReverseMap();
+
+            CreateMap<ZipMongoModel, ZipMongoDB>()
+                        .ForMember(a => a.Loc, b => b.MapFrom(c => c.Loc))
+                        .ReverseMap();
+
+
         }
 
     }

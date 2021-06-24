@@ -1,7 +1,9 @@
+
 using Autofac;
 using AutoMapper;
 using BotMongoII.Database;
 using BotMongoII.GraphQL;
+using BotMongoII.GraphQL.Zip;
 using GraphQL.Server;
 using GraphQL.SystemTextJson;
 using Microsoft.AspNetCore.Builder;
@@ -34,10 +36,16 @@ namespace BotMongoII
         {
             services.AddControllers();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MaperProfile());
+                 
             });
+
+            mapperConfig.AssertConfigurationIsValid();
 
             //automapper
             IMapper mapper = mapperConfig.CreateMapper();
@@ -112,7 +120,9 @@ namespace BotMongoII
 
             app.UseGraphQLAltair("/");
 
-            app.UseGraphQL<AirSchema>();
+            app.UseGraphQL<ZipSchema>("/zip");
+            app.UseGraphQL<AirSchema>("/air");             
+
 
         }
 
@@ -121,11 +131,15 @@ namespace BotMongoII
         {
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
             builder.RegisterType<AirRepository>().As<IAirRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<ZipRepository>().As<IZipRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<DocumentWriter>().AsImplementedInterfaces().SingleInstance();             
 
-            builder.RegisterType<DocumentWriter>().AsImplementedInterfaces().SingleInstance();
-            //pending...
             builder.RegisterType<QueryObject>().AsSelf().SingleInstance();
             builder.RegisterType<AirSchema>().AsSelf().SingleInstance();
+
+            builder.RegisterType<ZipQueryObject>().AsSelf().SingleInstance();
+            builder.RegisterType<ZipSchema>().AsSelf().SingleInstance();
+
         }
     }
 }

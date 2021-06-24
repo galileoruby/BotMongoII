@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using GraphQL;
 using BotMongoII.Models;
+using BotMongoII.GraphQL.Zip;
 
 namespace BotMongoII.GraphQL
 {
@@ -107,6 +108,23 @@ namespace BotMongoII.GraphQL
                     return null;
 
                 });
+
+
+            //FieldAsync<ZipQueryObject, bool>(
+            //    name: "deleteZip",
+            //    description: "Delete zip mongo document per Id",
+            //    arguments: new QueryArguments(
+            //                   new QueryArgument<IdGraphType>
+            //                   {
+            //                       Name = "id",
+            //                       Description = "Id for Zip Mongo"
+            //                   }),
+            //    resolve: cc =>
+            //    {
+            //        var idCurrent = cc.GetArgument("id", string.Empty);
+            //        return repoZip.RemoveZipCode(idCurrent);
+            //    });
+
 
         }
     }

@@ -42,6 +42,13 @@ namespace BotMongoII.GraphQL
                  }
                 );
 
+            //FieldAsync<ListGraphType<ZipObject>, List<ZipMongoDB>>(
+            //   name: "allZip",
+            //   description: "Get all the zip mongo documents",
+            //   arguments: null,
+            //   resolve: c => repoZip.All()
+            //  );
+
         }
     }
 }
